@@ -1,4 +1,4 @@
-const CACHE = 'yasin-tahlil-v3';
+const CACHE = 'yasin-tahlil-v4';
 const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap';
 
 // ---- INSTALL: cache font CSS + discover & cache all font woff2 files ----
@@ -6,13 +6,13 @@ self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     try {
-      const cssResp = await fetch(FONT_CSS, { mode: 'cors' });
+      const cssResp = await fetch(FONT_CSS, { mode: 'cors', credentials: 'omit' });
       const cssText = await cssResp.clone().text();
       await cache.put(new Request(FONT_CSS), cssResp);
       const woff2Urls = [...cssText.matchAll(/url\(([^)]+\.woff2[^)]*?)\)/g)].map(m => m[1].replace(/['"]/g,''));
       await Promise.all(woff2Urls.map(async url => {
         try {
-          const r = await fetch(url, { mode: 'cors' });
+          const r = await fetch(url, { mode: 'cors', credentials: 'omit' });
           await cache.put(new Request(url), r);
         } catch(_) {}
       }));
@@ -40,7 +40,7 @@ self.addEventListener('fetch', e => {
     e.respondWith(
       caches.match(e.request).then(cached => {
         if (cached) return cached;
-        return fetch(e.request, { mode: 'cors' }).then(resp => {
+        return fetch(e.request, { mode: 'cors', credentials: 'omit' }).then(resp => {
           const clone = resp.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
           return resp;
