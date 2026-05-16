@@ -1302,21 +1302,33 @@ function setWeight(w, btn) {
 }
 
 // ===== BACKGROUND COLOR =====
+// Setiap tema punya: bg (surface), card (surface-card), alt (surface-alt)
+const bgPalette = {
+  'default':  { surface: null,      card: null,      alt: null },
+  '#FDF6E3':  { surface: '#FDF6E3', card: '#FFFDF5', alt: '#F5EDD4' },
+  '#F0FBF3':  { surface: '#F0FBF3', card: '#FAFFFC', alt: '#E3F5E8' },
+  '#F4ECD8':  { surface: '#F4ECD8', card: '#FDF8EE', alt: '#EBE0C8' },
+  '#EFF6FF':  { surface: '#EFF6FF', card: '#F9FCFF', alt: '#E2EFFE' },
+  '#FFF1F2':  { surface: '#FFF1F2', card: '#FFF8F9', alt: '#FFE4E6' },
+  '#1E293B':  { surface: '#1E293B', card: '#273548', alt: '#162030' },
+};
+
 function setBgColor(val, btn) {
   document.querySelectorAll('.bg-swatch').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  if (val === 'default') {
+  const p = bgPalette[val];
+  if (!p || p.surface === null) {
     document.body.style.backgroundColor = '';
     document.documentElement.style.removeProperty('--surface');
+    document.documentElement.style.removeProperty('--surface-card');
     document.documentElement.style.removeProperty('--surface-alt');
-    localStorage.setItem('bgColor', 'default');
   } else {
-    document.body.style.backgroundColor = val;
-    document.documentElement.style.setProperty('--surface', val);
-    // slightly tinted surface-alt
-    document.documentElement.style.setProperty('--surface-alt', val);
-    localStorage.setItem('bgColor', val);
+    document.body.style.backgroundColor = p.surface;
+    document.documentElement.style.setProperty('--surface', p.surface);
+    document.documentElement.style.setProperty('--surface-card', p.card);
+    document.documentElement.style.setProperty('--surface-alt', p.alt);
   }
+  localStorage.setItem('bgColor', val);
 }
 
 // ===== RESTORE SETTINGS =====
