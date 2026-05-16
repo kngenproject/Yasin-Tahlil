@@ -1,6 +1,6 @@
 // sw.js — Service Worker untuk Hadhroh · Yasin · Tahlil · Do'a
 // Ganti CACHE_NAME setiap deploy baru agar update terdeteksi
-const CACHE_NAME = 'yasin-v1';
+const CACHE_NAME = 'yasin-v1.1';
 
 const PRECACHE = [
   './',
