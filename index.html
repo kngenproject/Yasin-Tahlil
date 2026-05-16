@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" id="theme-color-meta" content="#1B4332">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Yasin Tahlil">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Hadhroh · Yasin · Tahlil · Do'a</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Greens */
+  --g-900: #081C0F;
+  --g-800: #0F2E1B;
+  --g-700: #1B4332;
+  --g-600: #2D6A4F;
+  --g-500: #40916C;
+  --g-400: #52B788;
+  --g-200: #B7E4C7;
+  --g-100: #D8F3DC;
+  --g-50:  #F0FBF3;
+
+  /* Gold */
+  --gold:        #C9A84C;
+  --gold-light:  #E5C76A;
+  --gold-pale:   #FDF3D9;
+  --gold-muted:  #8A6D2C;
+
+  /* Neutrals */
+  --cream:       #FEFDF8;
+  --paper:       #F7F4EC;
+  --warm-100:    #EDE8DB;
+  --warm-200:    #D9D0BC;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #4A5568;
+  --text-muted:     #8A9099;
+  --white:          #FFFFFF;
+
+  /* Semantic */
+  --surface:        var(--cream);
+  --surface-card:   var(--white);
+  --surface-alt:    var(--paper);
+  --border:         rgba(0,0,0,0.07);
+  --border-mid:     rgba(0,0,0,0.12);
+  --shadow-sm:      0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:      0 12px 40px rgba(0,0,0,0.12);
+
+  /* Radius */
+  --r-sm:   8px;
+  --r-md:   14px;
+  --r-lg:   20px;
+  --r-xl:   28px;
+  --r-full: 999px;
+
+  /* Arabic */
+  --arabic-font: 'Scheherazade New', serif;
+  --arabic-size: 26px;
+  --arabic-line: 2.15;
+
+  /* UI Font */
+  --ui-font: 'Plus Jakarta Sans', sans-serif;
+
+  /* Navbar */
+  --navbar-h: 68px;
+  --header-h: 100px;
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+[data-theme="dark"] {
+  --g-900: #D8F3DC;
+  --g-800: #B7E4C7;
+  --g-700: #74C69D;
+  --g-600: #52B788;
+  --g-500: #2D6A4F;
+  --g-400: #1B4332;
+  --g-200: #0F2E1B;
+  --g-100: #081C0F;
+  --g-50:  #060F08;
+
+  --cream:          #0B1710;
+  --paper:          #0F1E13;
+  --warm-100:       #162219;
+  --warm-200:       #1F2E23;
+  --text-primary:   #EEF4EE;
+  --text-secondary: #9DB8A3;
+  --text-muted:     #5C7A63;
+  --white:          #132018;
+
+  --surface:        #0B1710;
+  --surface-card:   #132018;
+  --surface-alt:    #0F1E13;
+  --border:         rgba(255,255,255,0.06);
+  --border-mid:     rgba(255,255,255,0.1);
+  --shadow-sm:      0 1px 4px rgba(0,0,0,0.3);
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:      0 12px 40px rgba(0,0,0,0.6);
+
+  --gold-pale:   #1C1708;
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ui-font);
+  background: var(--surface);
+  color: var(--text-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  direction: rtl;
+  transition: background 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ============================================================
+   STATUS BAR SPACER
+   ============================================================ */
+.status-spacer {
+  height: env(safe-area-inset-top, 0px);
+  background: var(--g-700);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.app-header {
+  background: linear-gradient(160deg, var(--g-700) 0%, var(--g-600) 70%, var(--g-500) 100%);
+  padding: 14px 18px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  overflow: hidden;
+}
+
+/* Geometric decoration */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: -40px; left: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -20px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-arabic {
+  font-family: 'Scheherazade New', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.header-latin {
+  font-family: var(--ui-font);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  direction: ltr;
+  opacity: 0.9;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  direction: ltr;
+}
+
+.hdr-btn {
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold-light);
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.15s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.hdr-btn:active { transform: scale(0.93); background: rgba(201,168,76,0.2); }
+
+/* Gold separator line */
+.header-divider {
+  margin-top: 14px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), rgba(201,168,76,0.8), rgba(201,168,76,0.5), transparent);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   BOTTOM NAV BAR
+   ============================================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 300;
+  background: var(--surface-card);
+  border-top: 1px solid var(--border-mid);
+  display: flex;
+  padding-bottom: var(--safe-bottom);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 4px 14px;
+  gap: 4px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.nav-label {
+  font-family: var(--ui-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+  direction: ltr;
+}
+
+.nav-item.active .nav-label {
+  color: var(--g-600);
+}
+[data-theme="dark"] .nav-item.active .nav-label {
+  color: var(--gold);
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--g-500);
+  transition: width 0.3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] .nav-item::before { background: var(--gold); }
+.nav-item.active::before { width: 32px; }
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.app-body {
+  padding: 16px 14px calc(var(--navbar-h) + var(--safe-bottom) + 16px);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   TAB PANELS
+   ============================================================ */
+.tab-panel {
+  display: none;
+  animation: panelIn 0.28s ease both;
+}
+.tab-panel.active { display: block; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   PAGE LABEL
+   ============================================================ */
+.page-label {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  direction: ltr;
+  text-align: center;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.page-label::before, .page-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-mid));
+}
+.page-label::after { background: linear-gradient(270deg, transparent, var(--border-mid)); }
+
+/* ============================================================
+   SECTION CARDS
+   ============================================================ */
+.s-card {
+  background: var(--surface-card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: background 0.35s, box-shadow 0.2s;
+}
+.s-card:active { box-shadow: var(--shadow-md); }
+
+/* Card Header */
+.s-head {
+  padding: 11px 16px 10px;
+  background: linear-gradient(90deg, var(--g-700) 0%, var(--g-600) 100%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+[data-theme="dark"] .s-head {
+  background: linear-gradient(90deg, var(--g-200) 0%, var(--g-100) 100%);
+}
+
+.s-head-icon {
+  font-size: 13px;
+  opacity: 0.85;
+}
+.s-head-title {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  direction: ltr;
+}
+[data-theme="dark"] .s-head-title { color: var(--g-700); }
+
+/* Repeat badge on s-head */
+.s-head-badge {
+  margin-right: auto;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold-light);
+  font-family: 'Scheherazade New', serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 1px 10px;
+  border-radius: var(--r-full);
+  direction: rtl;
+}
+[data-theme="dark"] .s-head-badge {
+  background: rgba(0,0,0,0.2);
+  color: var(--gold);
+  border-color: rgba(201,168,76,0.3);
+}
+
+/* Card Body */
+.s-body {
+  padding: 20px 18px 22px;
+}
+
+/* ============================================================
+   FATIHA CARD (special - cream background)
+   ============================================================ */
+.fatiha-card {
+  background: var(--gold-pale);
+  border-color: rgba(201,168,76,0.2);
+}
+[data-theme="dark"] .fatiha-card { background: var(--gold-pale); border-color: rgba(201,168,76,0.15); }
+
+.fatiha-pill {
+  display: inline-flex;
+  align-items: center;
+  background: var(--gold);
+  color: #fff;
+  font-family: 'Scheherazade New', serif;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px 20px;
+  border-radius: var(--r-full);
+  box-shadow: 0 3px 10px rgba(201,168,76,0.35);
+}
+
+/* ============================================================
+   ARABIC TEXT STYLES
+   ============================================================ */
+.arabic {
+  font-family: var(--arabic-font);
+  font-size: var(--arabic-size);
+  line-height: var(--arabic-line);
+  color: var(--text-primary);
+  direction: rtl;
+  text-align: right;
+  transition: font-size 0.2s, font-family 0.25s, color 0.3s;
+}
+.arabic.sm  { font-size: calc(var(--arabic-size) - 2px); }
+.arabic.lg  { font-size: calc(var(--arabic-size) + 2px); }
+.arabic.xl  { font-size: calc(var(--arabic-size) + 5px); }
+.arabic.center { text-align: center; }
+
+.basmalah {
+  font-family: var(--arabic-font);
+  font-size: calc(var(--arabic-size) + 1px);
+  color: var(--g-600);
+  text-align: center;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(46,125,82,0.2);
+  transition: font-size 0.2s, color 0.3s;
+}
+[data-theme="dark"] .basmalah { color: var(--gold); }
+
+/* Divider ornament */
+.ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 13px;
+  margin: 16px 0 12px;
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  direction: ltr;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3));
+}
+.ornament::after { background: linear-gradient(270deg, transparent, rgba(201,168,76,0.3)); }
+
+/* Repeat badge inline */
+.rep {
+  display: inline-flex;
+  align-items: center;
+  background: var(--g-100);
+  color: var(--g-600);
+  font-family: 'Scheherazade New', serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 2px 12px;
+  border-radius: var(--r-full);
+  vertical-align: middle;
+  border: 1px solid rgba(46,125,82,0.18);
+  margin-inline-start: 6px;
+}
+[data-theme="dark"] .rep {
+  background: rgba(52,211,153,0.1);
+  color: var(--gold);
+  border-color: rgba(201,168,76,0.2);
+}
+
+/* ============================================================
+   VERSE NUMBER CHIP
+   ============================================================ */
+.verse-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--g-100);
+  color: var(--g-600);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--ui-font);
+  direction: ltr;
+  vertical-align: middle;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .verse-num {
+  background: rgba(52,211,153,0.1);
+  color: var(--gold);
+}
+
+/* ============================================================
+   OFFLINE & PWA BANNERS
+   ============================================================ */
+.banner {
+  display: none;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 10px;
+  direction: ltr;
+}
+.banner.show { display: flex; }
+
+.offline-banner {
+  background: #92400E;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.offline-banner span {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  color: #FEF3C7;
+  font-weight: 500;
+}
+
+.pwa-banner {
+  background: linear-gradient(90deg, var(--g-700), var(--g-600));
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+.pwa-banner-text {
+  flex: 1;
+  font-family: var(--ui-font);
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
+}
+.pwa-banner-text strong {
+  display: block;
+  font-size: 13px;
+  color: var(--gold-light);
+  margin-bottom: 1px;
+}
+.pwa-install-btn {
+  background: var(--gold);
+  color: #1a1a1a;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--ui-font);
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.pwa-install-btn:active { opacity: 0.85; }
+.pwa-dismiss-btn {
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+  padding: 2px 4px;
+}
+
+/* ============================================================
+   SETTINGS SHEET
+   ============================================================ */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: flex-end;
+}
+.sheet-overlay.open { display: flex; }
+
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-height: 90vh;
+  background: var(--surface-card);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding: 0 20px calc(24px + var(--safe-bottom));
+  direction: ltr;
+  overflow-y: auto;
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
+  animation: sheetUp 0.3s cubic-bezier(.32,.72,0,1) both;
+}
+@keyframes sheetUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.sheet-handle {
+  width: 36px; height: 4px;
+  background: var(--border-mid);
+  border-radius: 2px;
+  margin: 14px auto 20px;
+}
+
+.sheet-title {
+  font-family: var(--ui-font);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 22px;
+}
+
+.sheet-section {
+  margin-bottom: 24px;
+}
+
+.sheet-label {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Theme toggle pill */
+.theme-pill {
+  display: flex;
+  background: var(--surface-alt);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+  border: 1px solid var(--border);
+}
+.theme-opt {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.22s;
+  text-align: center;
+}
+.theme-opt.active {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Font size row */
+.size-row {
+  display: flex;
+  gap: 8px;
+}
+.size-opt {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-mid);
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-family: 'Scheherazade New', serif;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.size-opt.active {
+  background: var(--g-700);
+  color: white;
+  border-color: var(--g-700);
+  box-shadow: 0 3px 10px rgba(27,67,50,0.3);
+}
+[data-theme="dark"] .size-opt.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #111;
+}
+
+/* Font type */
+.font-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.font-opt {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-mid);
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--ui-font);
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.font-opt-preview {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+.font-opt.active {
+  background: var(--g-50);
+  border-color: var(--g-500);
+  color: var(--g-700);
+}
+[data-theme="dark"] .font-opt.active {
+  background: var(--gold-pale);
+  border-color: var(--gold);
+  color: var(--gold-muted);
+}
+.font-opt[data-font="Scheherazade New"] .font-opt-preview { font-family: 'Scheherazade New', serif; }
+.font-opt[data-font="Amiri"] .font-opt-preview { font-family: 'Amiri', serif; }
+.font-opt[data-font="Noto Naskh Arabic"] .font-opt-preview { font-family: 'Noto Naskh Arabic', serif; }
+
+/* ============================================================
+   SCROLL TO TOP
+   ============================================================ */
+.scroll-fab {
+  position: fixed;
+  bottom: calc(var(--navbar-h) + var(--safe-bottom) + 16px);
+  left: 16px;
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: var(--g-700);
+  color: white;
+  font-size: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(27,67,50,0.4);
+  z-index: 250;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: opacity 0.2s, transform 0.2s;
+  direction: ltr;
+}
+.scroll-fab.visible { display: flex; }
+.scroll-fab:active { transform: scale(0.93); }
+[data-theme="dark"] .scroll-fab { background: var(--gold); color: #111; box-shadow: 0 4px 16px rgba(201,168,76,0.35); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.app-footer {
+  text-align: center;
+  padding: 8px 0 6px;
+  font-family: 'Scheherazade New', serif;
+  font-size: 18px;
+  color: var(--text-muted);
+  direction: rtl;
+}
+
+/* ============================================================
+   SECTION INTRO (for Hadhroh tawassul)
+   ============================================================ */
+.tawassul-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--g-700), var(--g-600));
+  color: var(--gold-light);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--r-full);
+  margin-bottom: 16px;
+  direction: ltr;
+}
+
+/* ============================================================
+   RESPONSIVE UTILITY
+   ============================================================ */
+@media (min-width: 500px) {
+  .app-header { padding: 16px 24px 18px; }
+  .app-body { padding: 20px 20px calc(var(--navbar-h) + var(--safe-bottom) + 20px); }
+}
+</style>
+</head>
+<body>
+
+<!-- Status bar spacer -->
+<div class="status-spacer"></div>
+
+<!-- Offline banner -->
+<div class="banner offline-banner" id="offlineBanner">
+  <span>📵 Offline — konten tetap tersedia</span>
+</div>
+
+<!-- PWA Install banner -->
+<div class="banner pwa-banner" id="pwaBanner">
+  <div class="pwa-banner-text">
+    <strong>Pasang Aplikasi</strong>
+    Akses offline tanpa buka browser
+  </div>
+  <button class="pwa-install-btn" id="pwaInstallBtn">Pasang</button>
+  <button class="pwa-dismiss-btn" id="pwaDismissBtn">✕</button>
+</div>
+
+<!-- Settings Sheet -->
+<div class="sheet-overlay" id="settingsOverlay">
+  <div class="sheet-backdrop" id="sheetBackdrop"></div>
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Pengaturan</div>
+
+    <div class="sheet-section">
+      <div class="sheet-label">Mode Tampilan</div>
+      <div class="theme-pill">
+        <button class="theme-opt active" id="themeLight" onclick="setTheme('light')">☀️ Terang</button>
+        <button class="theme-opt" id="themeDark" onclick="setTheme('dark')">🌙 Gelap</button>
+      </div>
+    </div>
+
+    <div class="sheet-section">
+      <div class="sheet-label">Ukuran Teks Arab</div>
+      <div class="size-row">
+        <button class="size-opt" style="font-size:18px" onclick="setSize('sm')" id="sizeSm">ص</button>
+        <button class="size-opt active" style="font-size:22px" onclick="setSize('md')" id="sizeMd">ص</button>
+        <button class="size-opt" style="font-size:26px" onclick="setSize('lg')" id="sizeLg">ص</button>
+        <button class="size-opt" style="font-size:30px" onclick="setSize('xl')" id="sizeXl">ص</button>
+      </div>
+    </div>
+
+    <div class="sheet-section">
+      <div class="sheet-label">Jenis Font Arab</div>
+      <div class="font-row">
+        <button class="font-opt active" data-font="Scheherazade New" onclick="setFont('Scheherazade New',this)">
+          Scheherazade New
+          <span class="font-opt-preview">بِسْمِ اللّٰهِ</span>
+        </button>
+        <button class="font-opt" data-font="Amiri" onclick="setFont('Amiri',this)">
+          Amiri
+          <span class="font-opt-preview">بِسْمِ اللّٰهِ</span>
+        </button>
+        <button class="font-opt" data-font="Noto Naskh Arabic" onclick="setFont('Noto Naskh Arabic',this)">
+          Noto Naskh Arabic
+          <span class="font-opt-preview">بِسْمِ اللّٰهِ</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-arabic">يٰسٓ · تَهْلِيْل</div>
+      <div class="header-latin">Hadhroh · Yasin · Tahlil · Do'a</div>
+    </div>
+    <div class="header-actions">
+      <button class="hdr-btn" onclick="openSettings()" aria-label="Pengaturan">⚙️</button>
+    </div>
+  </div>
+  <div class="header-divider"></div>
+</header>
+
+<!-- ============================================================
+     MAIN BODY
+     ============================================================ -->
+<main class="app-body">
+
+  <!-- ========== HADHROH ========== -->
+  <div class="tab-panel active" id="panel-hadhroh">
+    <div class="page-label">Tawassul · Hadhroh</div>
+
+    <div class="s-card fatiha-card">
+      <div class="s-body">
+        <div class="arabic sm">إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى سَيِّدِنَا مُحمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَاٰلِهِ وَأَزْوَاجِهِ وَأَوْلَادِهِ وَذُرِّيَّاتِهِ</div>
+        <div style="margin-top:16px;text-align:center;"><span class="fatiha-pill">اَلْفَاتِحَةُ</span></div>
+      </div>
+    </div>
+
+    <div class="s-card fatiha-card">
+      <div class="s-body">
+        <div class="arabic sm">ثُمَّ إِلَى حَضْرَةِ إِخْوَانِهِ مِنَ الْأَنْبِيَاءِ وَالْمُرْسَلِيْنَ وَالْأَوْلِيَاءِ وَالشُّهَدَاءِ وَالصَّالِحِيْنَ وَالصَّحَابَةِ وَالتَّابِعِيْنَ وَالْعُلَمَاءِ الْعَامِلِيْنَ وَالْمُصَنِّفِيْنَ الْمُخْلِصِيْنَ وَجَمِيْعِ الْمَلَائِكَةِ الْمُقَرَّبِيْنَ، خُصُوْصًا إِلَى سَيِّدِنَا الشَّيْخِ عَبْدِ الْقَادِرِ الْجِيْلَانِي وَخُصُوْصًا إِلَى مُؤَسِّسِيْ جَمْعِيَّةِ نَهْضَةِ الْعُلَمَاءِ</div>
+        <div style="margin-top:16px;text-align:center;"><span class="fatiha-pill">اَلْفَاتِحَةُ</span></div>
+      </div>
+    </div>
+
+    <div class="s-card fatiha-card">
+      <div class="s-body">
+        <div class="arabic sm">ثُمَّ إِلَى جَمِيْعِ أَهْلِ الْقُبُوْرِ مِنَ الْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ مِنْ مَشَارِقِ الْأَرْضِ إِلَى مَغَارِبِهَا بَرِّهَا وَبَحْرِهَا خُصُوْصًا إِلَى اٰبَائِنَا وَأُمَّهَاتِنَا وَأَجْدَادِنَا وَجَدَّاتِنَا وَمَشَايِخِنَا وَمَشَايِخِ مَشَايِخِنَا وَأَسَاتِذَةِ أَسَاتِذَتِنَا وَلِمَنْ أَحْسَنَ إِلَيْنَا وَلِمَنِ اجْتَمَعْنَا هٰهُنَا بِسَبَبِهِ</div>
+        <div style="margin-top:16px;text-align:center;"><span class="fatiha-pill">اَلْفَاتِحَةُ</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== YASIN ========== -->
+  <div class="tab-panel" id="panel-yasin">
+    <div class="page-label">Surah Yasin · Al-Qur'an 36</div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">📖</span><span class="s-head-title">Surah Yasin (1–83)</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">
+          يٰسٓ ۚ﴿١﴾ وَالْقُرْاٰنِ الْحَكِيْمِ ۙ﴿٢﴾ اِنَّكَ لَمِنَ الْمُرْسَلِيْنَ ۙ﴿٣﴾ عَلٰى صِرَاطٍ مُّسْتَقِيْمٍ ؕ﴿٤﴾ تَنْزِيْلَ الْعَزِيْزِ الرَّحِيْمِ ۙ﴿٥﴾ لِتُنْذِرَ قَوْمًا مَّآ اُنْذِرَ اٰبَآؤُهُمْ فَهُمْ غٰفِلُوْنَ ﴿٦﴾ لَقَدْ حَقَّ الْقَوْلُ عَلٰٓى اَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُوْنَ ﴿٧﴾ اِنَّا جَعَلْنَا فِيْٓ اَعْنَاقِهِمْ اَغْلٰلًا فَهِيَ اِلَى الْاَذْقَانِ فَهُمْ مُّقْمَحُوْنَ ﴿٨﴾ وَجَعَلْنَا مِنْۢ بَيْنِ اَيْدِيْهِمْ سَدًّا وَّمِنْ خَلْفِهِمْ سَدًّا فَاَغْشَيْنٰهُمْ فَهُمْ لَا يُبْصِرُوْنَ ﴿٩﴾ وَسَوَآءٌ عَلَيْهِمْ ءَاَنْذَرْتَهُمْ اَمْ لَمْ تُنْذِرْهُمْ لَا يُؤْمِنُوْنَ ﴿١٠﴾ اِنَّمَا تُنْذِرُ مَنِ اتَّبَعَ الذِّكْرَ وَخَشِيَ الرَّحْمٰنَ بِالْغَيْبِ ۚ فَبَشِّرْهُ بِمَغْفِرَةٍ وَّاَجْرٍ كَرِيْمٍ ﴿١١﴾ اِنَّا نَحْنُ نُحْيِ الْمَوْتٰى وَنَكْتُبُ مَا قَدَّمُوْا وَاٰثَارَهُمْ ؕ وَكُلَّ شَيْءٍ اَحْصَيْنٰهُ فِيْٓ اِمَامٍ مُّبِيْنٍ ﴿١٢﴾
+          <br><br>
+          وَاضْرِبْ لَهُمْ مَّثَلًا اَصْحٰبَ الْقَرْيَةِ ۘ اِذْ جَآءَهَا الْمُرْسَلُوْنَ ﴿١٣﴾ اِذْ اَرْسَلْنَآ اِلَيْهِمُ اثْنَيْنِ فَكَذَّبُوْهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُوْٓا اِنَّآ اِلَيْكُمْ مُّرْسَلُوْنَ ﴿١٤﴾ قَالُوْا مَآ اَنْتُمْ اِلَّا بَشَرٌ مِّثْلُنَا ۙ وَمَآ اَنْزَلَ الرَّحْمٰنُ مِنْ شَيْءٍ ۙ اِنْ اَنْتُمْ اِلَّا تَكْذِبُوْنَ ﴿١٥﴾ قَالُوْا رَبُّنَا يَعْلَمُ اِنَّآ اِلَيْكُمْ لَمُرْسَلُوْنَ ﴿١٦﴾ وَمَا عَلَيْنَآ اِلَّا الْبَلٰغُ الْمُبِيْنُ ﴿١٧﴾ قَالُوْٓا اِنَّا تَطَيَّرْنَا بِكُمْ ۚ لَىِٕنْ لَّمْ تَنْتَهُوْا لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُمْ مِّنَّا عَذَابٌ اَلِيْمٌ ﴿١٨﴾ قَالُوْا طَاۤىِٕرُكُمْ مَّعَكُمْ ؕ اَىِٕنْ ذُكِّرْتُمْ ؕ بَلْ اَنْتُمْ قَوْمٌ مُّسْرِفُوْنَ ﴿١٩﴾ وَجَآءَ مِنْ اَقْصَا الْمَدِيْنَةِ رَجُلٌ يَّسْعٰى قَالَ يٰقَوْمِ اتَّبِعُوا الْمُرْسَلِيْنَ ﴿٢٠﴾ اتَّبِعُوْا مَنْ لَّا يَسْـَٔلُكُمْ اَجْرًا وَّهُمْ مُّهْتَدُوْنَ ﴿٢١﴾ وَمَا لِيَ لَآ اَعْبُدُ الَّذِيْ فَطَرَنِيْ وَاِلَيْهِ تُرْجَعُوْنَ ﴿٢٢﴾ ءَاَتَّخِذُ مِنْ دُوْنِهٖٓ اٰلِهَةً اِنْ يُّرِدْنِ الرَّحْمٰنُ بِضُرٍّ لَّا تُغْنِ عَنِّيْ شَفَاعَتُهُمْ شَيْـًٔا وَّلَا يُنْقِذُوْنِ ﴿٢٣﴾ اِنِّيْٓ اِذًا لَّفِيْ ضَلٰلٍ مُّبِيْنٍ ﴿٢٤﴾ اِنِّيْٓ اٰمَنْتُ بِرَبِّكُمْ فَاسْمَعُوْنِ ﴿٢٥﴾ قِيْلَ ادْخُلِ الْجَنَّةَ ؕ قَالَ يٰلَيْتَ قَوْمِيْ يَعْلَمُوْنَ ﴿٢٦﴾ بِمَا غَفَرَ لِيْ رَبِّيْ وَجَعَلَنِيْ مِنَ الْمُكْرَمِيْنَ ﴿٢٧﴾ وَمَآ اَنْزَلْنَا عَلٰى قَوْمِهٖ مِنْۢ بَعْدِهٖ مِنْ جُنْدٍ مِّنَ السَّمَآءِ وَمَا كُنَّا مُنْزِلِيْنَ ﴿٢٨﴾ اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ خٰمِدُوْنَ ﴿٢٩﴾ يٰحَسْرَةً عَلَى الْعِبَادِ ۚ مَا يَأْتِيْهِمْ مِّنْ رَّسُوْلٍ اِلَّا كَانُوْا بِهٖ يَسْتَهْزِءُوْنَ ﴿٣٠﴾
+          <br><br>
+          اَلَمْ يَرَوْا كَمْ اَهْلَكْنَا قَبْلَهُمْ مِّنَ الْقُرُوْنِ اَنَّهُمْ اِلَيْهِمْ لَا يَرْجِعُوْنَ ﴿٣١﴾ وَاِنْ كُلٌّ لَّمَّا جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ ﴿٣٢﴾ وَاٰيَةٌ لَّهُمُ الْاَرْضُ الْمَيْتَةُ ۖ اَحْيَيْنٰهَا وَاَخْرَجْنَا مِنْهَا حَبًّا فَمِنْهُ يَأْكُلُوْنَ ﴿٣٣﴾ وَجَعَلْنَا فِيْهَا جَنّٰتٍ مِّنْ نَّخِيْلٍ وَّاَعْنَابٍ وَّفَجَّرْنَا فِيْهَا مِنَ الْعُيُوْنِ ﴿٣٤﴾ لِيَأْكُلُوْا مِنْ ثَمَرِهٖ ۙ وَمَا عَمِلَتْهُ اَيْدِيْهِمْ ؕ اَفَلَا يَشْكُرُوْنَ ﴿٣٥﴾ سُبْحٰنَ الَّذِيْ خَلَقَ الْاَزْوَاجَ كُلَّهَا مِمَّا تُنْۢبِتُ الْاَرْضُ وَمِنْ اَنْفُسِهِمْ وَمِمَّا لَا يَعْلَمُوْنَ ﴿٣٦﴾ وَاٰيَةٌ لَّهُمُ الَّيْلُ ۖ نَسْلَخُ مِنْهُ النَّهَارَ فَاِذَا هُمْ مُّظْلِمُوْنَ ﴿٣٧﴾ وَالشَّمْسُ تَجْرِيْ لِمُسْتَقَرٍّ لَّهَا ؕ ذٰلِكَ تَقْدِيْرُ الْعَزِيْزِ الْعَلِيْمِ ﴿٣٨﴾ وَالْقَمَرَ قَدَّرْنٰهُ مَنَازِلَ حَتّٰى عَادَ كَالْعُرْجُوْنِ الْقَدِيْمِ ﴿٣٩﴾ لَا الشَّمْسُ يَنْۢبَغِيْ لَهَآ اَنْ تُدْرِكَ الْقَمَرَ وَلَا الَّيْلُ سَابِقُ النَّهَارِ ؕ وَكُلٌّ فِيْ فَلَكٍ يَّسْبَحُوْنَ ﴿٤٠﴾
+          <br><br>
+          وَاٰيَةٌ لَّهُمْ اَنَّا حَمَلْنَا ذُرِّيَّتَهُمْ فِى الْفُلْكِ الْمَشْحُوْنِ ﴿٤١﴾ وَخَلَقْنَا لَهُمْ مِّنْ مِّثْلِهٖ مَا يَرْكَبُوْنَ ﴿٤٢﴾ وَاِنْ نَّشَأْ نُغْرِقْهُمْ فَلَا صَرِيْخَ لَهُمْ وَلَا هُمْ يُنْقَذُوْنَ ﴿٤٣﴾ اِلَّا رَحْمَةً مِّنَّا وَمَتَاعًا اِلٰى حِيْنٍ ﴿٤٤﴾ وَاِذَا قِيْلَ لَهُمُ اتَّقُوْا مَا بَيْنَ اَيْدِيْكُمْ وَمَا خَلْفَكُمْ لَعَلَّكُمْ تُرْحَمُوْنَ ﴿٤٥﴾ وَمَا تَأْتِيْهِمْ مِّنْ اٰيَةٍ مِّنْ اٰيٰتِ رَبِّهِمْ اِلَّا كَانُوْا عَنْهَا مُعْرِضِيْنَ ﴿٤٦﴾ وَاِذَا قِيْلَ لَهُمْ اَنْفِقُوْا مِمَّا رَزَقَكُمُ اللّٰهُ ۙ قَالَ الَّذِيْنَ كَفَرُوْا لِلَّذِيْنَ اٰمَنُوْٓا اَنُطْعِمُ مَنْ لَّوْ يَشَاۤءُ اللّٰهُ اَطْعَمَهٗٓ ۖ اِنْ اَنْتُمْ اِلَّا فِيْ ضَلٰلٍ مُّبِيْنٍ ﴿٤٧﴾ وَيَقُوْلُوْنَ مَتٰى هٰذَا الْوَعْدُ اِنْ كُنْتُمْ صٰدِقِيْنَ ﴿٤٨﴾ مَا يَنْظُرُوْنَ اِلَّا صَيْحَةً وَّاحِدَةً تَأْخُذُهُمْ وَهُمْ يَخِصِّمُوْنَ ﴿٤٩﴾ فَلَا يَسْتَطِيْعُوْنَ تَوْصِيَةً وَّلَآ اِلٰٓى اَهْلِهِمْ يَرْجِعُوْنَ ﴿٥٠﴾
+          <br><br>
+          وَنُفِخَ فِى الصُّوْرِ فَاِذَا هُمْ مِّنَ الْاَجْدَاثِ اِلٰى رَبِّهِمْ يَنْسِلُوْنَ ﴿٥١﴾ قَالُوْا يٰوَيْلَنَا مَنْۢ بَعَثَنَا مِنْ مَّرْقَدِنَا ۜ ۗ هٰذَا مَا وَعَدَ الرَّحْمٰنُ وَصَدَقَ الْمُرْسَلُوْنَ ﴿٥٢﴾ اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ ﴿٥٣﴾ فَالْيَوْمَ لَا تُظْلَمُ نَفْسٌ شَيْـًٔا وَّلَا تُجْزَوْنَ اِلَّا مَا كُنْتُمْ تَعْمَلُوْنَ ﴿٥٤﴾ اِنَّ اَصْحٰبَ الْجَنَّةِ الْيَوْمَ فِيْ شُغُلٍ فٰكِهُوْنَ ﴿٥٥﴾ هُمْ وَاَزْوَاجُهُمْ فِيْ ظِلٰلٍ عَلَى الْاَرَاۤىِٕكِ مُتَّكِـُٔوْنَ ﴿٥٦﴾ لَهُمْ فِيْهَا فَاكِهَةٌ وَّلَهُمْ مَّا يَدَّعُوْنَ ﴿٥٧﴾ سَلٰمٌ ۙ قَوْلًا مِّنْ رَّبٍّ رَّحِيْمٍ ﴿٥٨﴾ وَامْتَازُوا الْيَوْمَ اَيُّهَا الْمُجْرِمُوْنَ ﴿٥٩﴾ اَلَمْ اَعْهَدْ اِلَيْكُمْ يٰبَنِيْٓ اٰدَمَ اَنْ لَّا تَعْبُدُوا الشَّيْطٰنَ ۚ اِنَّهٗ لَكُمْ عَدُوٌّ مُّبِيْنٌ ﴿٦٠﴾
+          <br><br>
+          وَّاَنِ اعْبُدُوْنِيْ ؕ هٰذَا صِرَاطٌ مُّسْتَقِيْمٌ ﴿٦١﴾ وَلَقَدْ اَضَلَّ مِنْكُمْ جِبِلًّا كَثِيْرًا ؕ اَفَلَمْ تَكُوْنُوْا تَعْقِلُوْنَ ﴿٦٢﴾ هٰذِهٖ جَهَنَّمُ الَّتِيْ كُنْتُمْ تُوْعَدُوْنَ ﴿٦٣﴾ اِصْلَوْهَا الْيَوْمَ بِمَا كُنْتُمْ تَكْفُرُوْنَ ﴿٦٤﴾ اَلْيَوْمَ نَخْتِمُ عَلٰٓى اَفْوَاهِهِمْ وَتُكَلِّمُنَآ اَيْدِيْهِمْ وَتَشْهَدُ اَرْجُلُهُمْ بِمَا كَانُوْا يَكْسِبُوْنَ ﴿٦٥﴾ وَلَوْ نَشَاۤءُ لَطَمَسْنَا عَلٰٓى اَعْيُنِهِمْ فَاسْتَبَقُوا الصِّرَاطَ فَاَنّٰى يُبْصِرُوْنَ ﴿٦٦﴾ وَلَوْ نَشَاۤءُ لَمَسَخْنٰهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوْا مُضِيًّا وَّلَا يَرْجِعُوْنَ ﴿٦٧﴾ وَمَنْ نُّعَمِّرْهُ نُنَكِّسْهُ فِى الْخَلْقِ ؕ اَفَلَا يَعْقِلُوْنَ ﴿٦٨﴾ وَمَا عَلَّمْنٰهُ الشِّعْرَ وَمَا يَنْۢبَغِيْ لَهٗ ؕ اِنْ هُوَ اِلَّا ذِكْرٌ وَّقُرْاٰنٌ مُّبِيْنٌ ﴿٦٩﴾ لِّيُنْذِرَ مَنْ كَانَ حَيًّا وَّيَحِقَّ الْقَوْلُ عَلَى الْكٰفِرِيْنَ ﴿٧٠﴾
+          <br><br>
+          اَوَلَمْ يَرَوْا اَنَّا خَلَقْنَا لَهُمْ مِّمَّا عَمِلَتْ اَيْدِيْنَآ اَنْعَامًا فَهُمْ لَهَا مٰلِكُوْنَ ﴿٧١﴾ وَذَلَّلْنٰهَا لَهُمْ فَمِنْهَا رَكُوْبُهُمْ وَمِنْهَا يَأْكُلُوْنَ ﴿٧٢﴾ وَلَهُمْ فِيْهَا مَنَافِعُ وَمَشَارِبُ ؕ اَفَلَا يَشْكُرُوْنَ ﴿٧٣﴾ وَاتَّخَذُوْا مِنْ دُوْنِ اللّٰهِ اٰلِهَةً لَّعَلَّهُمْ يُنْصَرُوْنَ ﴿٧٤﴾ لَا يَسْتَطِيْعُوْنَ نَصْرَهُمْ ۙ وَهُمْ لَهُمْ جُنْدٌ مُّحْضَرُوْنَ ﴿٧٥﴾ فَلَا يَحْزُنْكَ قَوْلُهُمْ ؕ اِنَّا نَعْلَمُ مَا يُسِرُّوْنَ وَمَا يُعْلِنُوْنَ ﴿٧٦﴾ اَوَلَمْ يَرَ الْاِنْسَانُ اَنَّا خَلَقْنٰهُ مِنْ نُّطْفَةٍ فَاِذَا هُوَ خَصِيْمٌ مُّبِيْنٌ ﴿٧٧﴾ وَضَرَبَ لَنَا مَثَلًا وَّنَسِيَ خَلْقَهٗ ؕ قَالَ مَنْ يُّحْيِ الْعِظَامَ وَهِيَ رَمِيْمٌ ﴿٧٨﴾ قُلْ يُحْيِيْهَا الَّذِيْٓ اَنْشَاَهَآ اَوَّلَ مَرَّةٍ ؕ وَهُوَ بِكُلِّ خَلْقٍ عَلِيْمٌ ﴿٧٩﴾ الَّذِيْ جَعَلَ لَكُمْ مِّنَ الشَّجَرِ الْاَخْضَرِ نَارًا فَاِذَآ اَنْتُمْ مِّنْهُ تُوْقِدُوْنَ ﴿٨٠﴾
+          <br><br>
+          اَوَلَيْسَ الَّذِيْ خَلَقَ السَّمٰوٰتِ وَالْاَرْضَ بِقٰدِرٍ عَلٰٓى اَنْ يَّخْلُقَ مِثْلَهُمْ ؕ بَلٰى ؗ وَهُوَ الْخَلّٰقُ الْعَلِيْمُ ﴿٨١﴾ اِنَّمَآ اَمْرُهٗٓ اِذَآ اَرَادَ شَيْـًٔا اَنْ يَّقُوْلَ لَهٗ كُنْ فَيَكُوْنُ ﴿٨٢﴾ فَسُبْحٰنَ الَّذِيْ بِيَدِهٖ مَلَكُوْتُ كُلِّ شَيْءٍ وَّاِلَيْهِ تُرْجَعُوْنَ ﴿٨٣﴾
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAHLIL ========== -->
+  <div class="tab-panel" id="panel-tahlil">
+    <div class="page-label">Tahlil · Dzikir Bersama</div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">Qul Huwallahu Ahad</span><span class="s-head-badge">×٣</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">قُلْ هُوَ اللّٰهُ اَحَدٌۚ، اَللّٰهُ الصَّمَدُۚ، لَمْ يَلِدْ وَلَمْ يُوْلَدْۙ، وَلَمْ يَكُنْ لَّهٗ كُفُوًا اَحَـدٌ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">Al-Falaq</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِۙ، مِنْ شَرِّ مَـا خَلَقَۙ، وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَۙ، وَمِنْ شَرِّ النَّفّٰثٰتِ فِى الْعُقَدِۙ، وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">An-Naas</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">قُلْ اَعُوْذُ بِرَبِّ النَّاسِۙ، مَلِكِ النَّاسِۙ، اِلٰهِ النَّاسِۙ، مِنْ شَرِّ الْوَسْوَاسِ ەۙ الْخَنَّاسِۖ، الَّذِيْ يُوَسْوِسُ فِيْ صُدُوْرِ النَّاسِۙ، مِنَ الْجِنَّةِ وَالنَّاسِ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">Al-Fatihah</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ، الرَّحْمٰنِ الرَّحِيْمِۙ، مٰلِكِ يَوْمِ الدِّيْنِۗ، اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُۗ، اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَۙ، صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ ەۙ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">Al-Baqarah 1–5</span></div>
+      <div class="s-body">
+        <div class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">الۤمّۤۚ، ذٰلِكَ الْكِتٰبُ لَا رَيْبَۛ فِيْهِۛ هُدًى لِّلْمُتَّقِيْنَۙ، الَّذِيْنَ يُؤْمِنُوْنَ بِالْغَيْبِ وَيُقِيْمُوْنَ الصَّلٰوةَ وَمِمَّا رَزَقْنٰهُمْ يُنْفِقُوْنَۙ، وَالَّذِيْنَ يُؤْمِنُوْنَ بِمَآ اُنْزِلَ اِلَيْكَ وَمَآ اُنْزِلَ مِنْ قَبْلِكَ ۚ وَبِالْاٰخِرَةِ هُمْ يُوْقِنُوْنَۗ، اُولٰۤىِٕكَ عَلٰى هُدًى مِّنْ رَّبِّهِمْۙ وَاُولٰۤىِٕكَ هُمُ الْمُفْلِحُوْنَ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">◆</span><span class="s-head-title">Ayat Kursi · Al-Baqarah 163 & 255</span></div>
+      <div class="s-body">
+        <div class="arabic sm">وَإِلٰهُكُمْ إِلٰهٌ وَّاحِدٌ لَا إِلٰهَ إِلَّا هُوَ الرَّحْمٰنُ الرَّحِيمُ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اَللّٰهُ لَآ اِلٰهَ اِلَّا هُوَۚ اَلْحَيُّ الْقَيُّوْمُ ەۚ لَا تَأْخُذُهٗ سِنَةٌ وَّلَا نَوْمٌۗ لَهٗ مَا فِى السَّمٰوٰتِ وَمَا فِى الْاَرْضِۗ مَنْ ذَا الَّذِيْ يَشْفَعُ عِنْدَهٗٓ اِلَّا بِاِذْنِهٖۗ يَعْلَمُ مَا بَيْنَ اَيْدِيْهِمْ وَمَا خَلْفَهُمْۚ وَلَا يُحِيْطُوْنَ بِشَيْءٍ مِّنْ عِلْمِهٖٓ اِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرْسِيُّهُ السَّمٰوٰتِ وَالْاَرْضَۚ وَلَا يَـُٔوْدُهٗ حِفْظُهُمَاۚ وَهُوَ الْعَلِيُّ الْعَظِيْمُ</div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-body">
+        <div class="arabic center">أَسْتَغْفِرُ اللهَ الْعَـظِيْمَ <span class="rep">×٣</span></div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-body">
+        <div class="arabic sm">أَفْضَلُ الذِّكْرِ فَاعْلَمْ أَنَّهُ لَا إِلٰهَ إِلَّا اللهُ، حَيٌّ مَوْجُوْدٌ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">لَا إِلٰهَ إِلَّا اللهُ، حَيٌّ مَعْبُوْدٌ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">لَاَ إِلٰهَ إِلَّا اللهُ، حَيٌّ بَاقٍ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic center">لَا إِلٰهَ إِلَّا اللهُ <span class="rep">×١٠٠</span></div>
+      </div>
+    </div>
+
+    <div class="s-card">
+      <div class="s-body">
+        <div class="arabic sm">اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ اَللّٰهُمَّ صَلِّ عَلَيْهِ وَسَلِّمْ <span class="rep">×٢</span></div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">سُبحَانَ اللهِ وَبِحَمْدِهِ سُبْحَانَ اللهِ الْعَظِيْمِ <span class="rep">×٣٣</span></div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">سُبْحَانَ اللهِ عَدَدَ مَـا خَلَقَ اللهُ <span class="rep">×٧</span></div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اَللّٰهُمَّ صَلِّ عَلَى حَبِيْبِكَ سَيِّدِنَا مُحَمَّدٍ وَعَلَى اٰلِهِ وَصَحْبِهِ وَسَلِّمْ <span class="rep">×٢</span></div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اَللّٰهُمَّ صَلِّ عَلَى حَبِيْبِكَ سَيِّدِنَا مُحَمَّدٍ وَعَلَى اٰلِهِ وَصَحْبِهِ وَبَارِكْ وَسَلِّمْ أَجْمَعِيْنَ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DOA ========== -->
+  <div class="tab-panel" id="panel-doa">
+    <div class="page-label">Do'a Penutup Tahlil</div>
+
+    <div class="s-card">
+      <div class="s-head"><span class="s-head-icon">🤲</span><span class="s-head-title">Do'a Tahlil</span></div>
+      <div class="s-body">
+        <div class="arabic sm">أَعُوْذُ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيْمِ</div>
+        <div class="ornament">✦</div>
+        <div class="basmalah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+        <div class="arabic sm">اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ، حَمْدَ الشَّاكِرِيْنَ حَمْدَ النَّاعِمِيْنَ، حَمْدًا يُّوَافِي نِعَمَهُ وَيُكَافِئُ مَزِيْدَهُ، يَا رَبَّنَا لَكَ الْحَمْدُ كَمَا يَنْبَغِيْ لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَّعَلَى اٰلِ سَيِّدِنَا مُحمَّدٍ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اَللّٰهُمَّ تَقَبَّلْ وَأَوْصِلْ ثَوَابَ مَا قَرَاْنَاهُ مِنَ الْقُرْآنِ الْعَظِيْمِ وَمَا هَلَّلْنَا وَمَا سَبَّحْنَا وَمَا اسْتَغْفَرْنَا وَمَا صَلَّيْنَا عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ هَدِيَّةً وَاصِلَةً وَرَحْمَةً نَازِلَةً وَبَرَكَةً شَامِلَةً إِلَى حَضَرَةِ حَبِيْبِنَا وَشَفِيْعِنَا وَقُرَّةِ أَعْيُنِنَا سَيِّدِنَا وَمَوْلَانَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">وَإِلَى جَمِيْعِ إِخْوَانِهِ مِنَ الْأَنْبِيَاءِ وَالْمُرْسَلِيْنَ وَالْأَوْلِيَاءِ وَالشُّهَدَاءِ وَالصَّالِحِيْنَ وَالصَّحَابَةِ وَالتَّابِعِيْنَ وَالْعُلَمَاءِ الْعَامِلِيْنَ وَالْمُصَنِّفِيْنَ الْمُخْلِصِيْنَ وَجَمِيْعِ الْمُجَاهِدِيْنَ فِي سَبِيْلِ اللهِ رَبِّ الْعَلَمِيْنَ وَالْمَلَائِكَةِ الْمُقَرَّبِيْنَ، خُصُوْصًا إِلَى سَيِّدِنَا الشَّيْخِ عَبْدِ الْقَادِرِ الْجِيْلَانِيّ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">ثُمَّ إِلَى أَرْوَاحِ جَمِيْعِ أَهْلِ الْقُبُوْرِ مِنَ الْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ مِنْ مَشَارِقِ الْأَرْضِ وَمَغَارِبِهَا بَرِّهَا وَبَحْرِهَا خُصُوْصًا إِلَى آبَائِنَا وَاُمَّهَاتِنَا وَأَجْدَادِنَا وَجَدَّاتِنَا، وَنَخَصُّ خَصُوْصًا إِلَى مَنِ اجْتَمَعْنَا هٰهُنَا بِسَبَبِهِ وَلِأَجْلِهِ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">اَللّٰهُمَّ اغْفِرْ لَهُمْ وَارْحَمْهُمْ وَعَافِهِمْ وَاعْفُ عَنْهُمْ، اَللّٰهُمَّ أَنْزِلِ الرَّحْمَةَ وَالْمَغْفِرَةَ عَلَى أَهْلِ الْقُبُوْرِ مِنْ أَهْلِ لَا إِلٰهَ إِلَّا اللهُ مُحَمَّدٌ رَّسُوْلُ اللهِ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">رَبَّنَا أَرِنَا الْحَقَّ حَقًّا وَّارْزُقْنَا اتِّبَاعَهُ، وَأَرِنَا الْبَاطِلَ بَاطِلًا وَّارْزُقْنَا اجْتِنَابَهُ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">رَبَّنَا اٰتِنَا فِي الدُّنْيَا حَسَنَةً وَّفِي الْآخِرَةِ حَسَنَةً وَّقِنَا عَذَابَ النَّارِ</div>
+        <div class="ornament">✦</div>
+        <div class="arabic sm">سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَلَمِيْنَ</div>
+        <div style="margin-top:18px;text-align:center;"><span class="fatiha-pill">اَلْفَاتِحَة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-footer">بِسْمِ اللهِ تَوَكَّلْتُ عَلَى اللهِ</div>
+
+</main>
+
+<!-- Offline ready toast -->
+<div id="offlineReady" style="
+  display:none; position:fixed; bottom:calc(var(--navbar-h) + var(--safe-bottom) + 16px);
+  right:16px; left:16px; z-index:400;
+  background:var(--g-700); color:#fff;
+  border-radius:12px; padding:12px 16px;
+  font-family:var(--ui-font); font-size:13px; font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  direction:ltr; display:none; align-items:center; gap:10px;
+  animation: toastIn 0.35s cubic-bezier(.34,1.56,.64,1) both;
+">
+  <span style="font-size:18px">✅</span>
+  <span>App siap digunakan offline!</span>
+</div>
+<style>
+@keyframes toastIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+</style>
+<button class="scroll-fab" id="scrollFab" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll ke atas">↑</button>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-hadhroh" onclick="switchTab('hadhroh',this)">
+    <span class="nav-label">Hadhroh</span>
+  </button>
+  <button class="nav-item" id="nav-yasin" onclick="switchTab('yasin',this)">
+    <span class="nav-label">Yasin</span>
+  </button>
+  <button class="nav-item" id="nav-tahlil" onclick="switchTab('tahlil',this)">
+    <span class="nav-label">Tahlil</span>
+  </button>
+  <button class="nav-item" id="nav-doa" onclick="switchTab('doa',this)">
+    <span class="nav-label">Do'a</span>
+  </button>
+</nav>
+
+<script>
+// ===== TAB SWITCHING =====
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== SCROLL FAB =====
+window.addEventListener('scroll', () => {
+  const fab = document.getElementById('scrollFab');
+  fab.classList.toggle('visible', window.scrollY > 280);
+}, { passive: true });
+
+// ===== SETTINGS =====
+function openSettings() {
+  document.getElementById('settingsOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSettings() {
+  document.getElementById('settingsOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('sheetBackdrop').addEventListener('click', closeSettings);
+
+// ===== THEME =====
+function setTheme(mode) {
+  document.documentElement.setAttribute('data-theme', mode);
+  document.getElementById('themeLight').classList.toggle('active', mode === 'light');
+  document.getElementById('themeDark').classList.toggle('active', mode === 'dark');
+  document.getElementById('theme-color-meta').content = mode === 'dark' ? '#0B1710' : '#1B4332';
+  localStorage.setItem('theme', mode);
+}
+
+// ===== FONT SIZE =====
+const sizeMap = { sm: '22px', md: '26px', lg: '30px', xl: '36px' };
+function setSize(s) {
+  document.documentElement.style.setProperty('--arabic-size', sizeMap[s]);
+  document.querySelectorAll('.size-opt').forEach(b => b.classList.remove('active'));
+  document.getElementById('size' + s.charAt(0).toUpperCase() + s.slice(1)).classList.add('active');
+  localStorage.setItem('fontSize', s);
+}
+
+// ===== FONT TYPE =====
+function setFont(font, btn) {
+  document.documentElement.style.setProperty('--arabic-font', "'" + font + "', serif");
+  document.querySelectorAll('.font-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  localStorage.setItem('arabicFont', font);
+}
+
+// ===== RESTORE SETTINGS =====
+(function restore() {
+  const theme = localStorage.getItem('theme') || 'light';
+  setTheme(theme);
+  const fontSize = localStorage.getItem('fontSize') || 'md';
+  setSize(fontSize);
+  const font = localStorage.getItem('arabicFont') || 'Scheherazade New';
+  const fontBtn = document.querySelector('.font-opt[data-font="' + font + '"]');
+  if (fontBtn) setFont(font, fontBtn);
+})();
+
+// ===== OFFLINE =====
+function updateOnline() {
+  document.getElementById('offlineBanner').classList.toggle('show', !navigator.onLine);
+}
+window.addEventListener('online', updateOnline);
+window.addEventListener('offline', updateOnline);
+updateOnline();
+
+// ===== PWA: SERVICE WORKER (Full Offline) =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js', { scope: './' })
+    .then(reg => {
+      console.log('[SW] Registered:', reg.scope);
+      // Notify user when new SW is waiting (app update available)
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        nw.addEventListener('statechange', () => {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            console.log('[SW] Update ready');
+          }
+        });
+      });
+    })
+    .catch(err => console.warn('[SW] Registration failed:', err));
+
+  // Show "offline ready" notice once SW controls the page
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!sessionStorage.getItem('swReady')) {
+      sessionStorage.setItem('swReady', '1');
+      const toast = document.getElementById('offlineReady');
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.5s'; setTimeout(() => toast.style.display = 'none', 500); }, 3500);
+    }
+  });
+}
+
+// ===== PWA: INSTALL PROMPT =====
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('pwaDismissed') && !localStorage.getItem('pwaInstalled')) {
+    document.getElementById('pwaBanner').classList.add('show');
+  }
+});
+document.getElementById('pwaInstallBtn').addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') localStorage.setItem('pwaInstalled', '1');
+    deferredPrompt = null;
+  }
+  document.getElementById('pwaBanner').classList.remove('show');
+});
+document.getElementById('pwaDismissBtn').addEventListener('click', () => {
+  document.getElementById('pwaBanner').classList.remove('show');
+  localStorage.setItem('pwaDismissed', '1');
+});
+window.addEventListener('appinstalled', () => {
+  document.getElementById('pwaBanner').classList.remove('show');
+  localStorage.setItem('pwaInstalled', '1');
+});
+</script>
+</body>
+</html>
