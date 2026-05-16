@@ -67,6 +67,10 @@
   --arabic-font: 'Scheherazade New', serif;
   --arabic-size: 26px;
   --arabic-line: 2.15;
+  --arabic-weight: 400;
+
+  /* Background color override (null = use default surface) */
+  --bg-override: none;
 
   /* UI Font */
   --ui-font: 'Plus Jakarta Sans', sans-serif;
@@ -129,6 +133,7 @@ body {
   transition: background 0.35s ease, color 0.35s ease;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none; /* disable pull-to-refresh */
 }
 
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -436,11 +441,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .arabic {
   font-family: var(--arabic-font);
   font-size: var(--arabic-size);
+  font-weight: var(--arabic-weight);
   line-height: var(--arabic-line);
   color: var(--text-primary);
   direction: rtl;
   text-align: right;
-  transition: font-size 0.2s, font-family 0.25s, color 0.3s;
+  transition: font-size 0.2s, font-family 0.25s, color 0.3s, font-weight 0.2s;
 }
 .arabic.sm  { font-size: calc(var(--arabic-size) - 2px); }
 .arabic.lg  { font-size: calc(var(--arabic-size) + 2px); }
@@ -450,12 +456,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .basmalah {
   font-family: var(--arabic-font);
   font-size: calc(var(--arabic-size) + 1px);
+  font-weight: var(--arabic-weight);
   color: var(--g-600);
   text-align: center;
   margin-bottom: 14px;
   padding-bottom: 14px;
   border-bottom: 1px dashed rgba(46,125,82,0.2);
-  transition: font-size 0.2s, color 0.3s;
+  transition: font-size 0.2s, color 0.3s, font-weight 0.2s;
 }
 [data-theme="dark"] .basmalah { color: var(--gold); }
 
@@ -800,6 +807,75 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ============================================================
+   FONT WEIGHT OPTIONS
+   ============================================================ */
+.weight-row {
+  display: flex;
+  gap: 8px;
+}
+.weight-opt {
+  flex: 1;
+  padding: 10px 4px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-mid);
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-family: 'Scheherazade New', serif;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.weight-opt.active {
+  background: var(--g-700);
+  color: white;
+  border-color: var(--g-700);
+  box-shadow: 0 3px 10px rgba(27,67,50,0.3);
+}
+[data-theme="dark"] .weight-opt.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #111;
+}
+
+/* ============================================================
+   BACKGROUND COLOR SWATCHES
+   ============================================================ */
+.bg-color-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.bg-swatch {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.2s;
+  position: relative;
+  outline: none;
+}
+.bg-swatch:active { transform: scale(0.9); }
+.bg-swatch.active {
+  border-color: var(--g-500);
+  transform: scale(1.12);
+  box-shadow: 0 0 0 3px rgba(64,145,108,0.25);
+}
+[data-theme="dark"] .bg-swatch.active {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.25);
+}
+.bg-swatch.active::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(0,0,0,0.5);
+}
+
+/* ============================================================
    RESPONSIVE UTILITY
    ============================================================ */
 @media (min-width: 500px) {
@@ -868,6 +944,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
           Noto Naskh Arabic
           <span class="font-opt-preview">بِسْمِ اللّٰهِ</span>
         </button>
+      </div>
+    </div>
+
+    <div class="sheet-section">
+      <div class="sheet-label">Tebal Font Arab</div>
+      <div class="weight-row">
+        <button class="weight-opt active" id="weightNormal" onclick="setWeight(400,this)" title="Normal">ب</button>
+        <button class="weight-opt" id="weightMedium" onclick="setWeight(500,this)" title="Sedang" style="font-weight:500">ب</button>
+        <button class="weight-opt" id="weightBold" onclick="setWeight(700,this)" title="Tebal" style="font-weight:700">ب</button>
+      </div>
+    </div>
+
+    <div class="sheet-section">
+      <div class="sheet-label">Warna Background</div>
+      <div class="bg-color-row">
+        <button class="bg-swatch active" id="bgDefault" onclick="setBgColor('default',this)" style="background:var(--cream); border-color:var(--border-mid);" title="Default"></button>
+        <button class="bg-swatch" id="bgWarm" onclick="setBgColor('#FDF6E3',this)" style="background:#FDF6E3;" title="Krem Hangat"></button>
+        <button class="bg-swatch" id="bgMint" onclick="setBgColor('#F0FBF3',this)" style="background:#F0FBF3;" title="Hijau Mint"></button>
+        <button class="bg-swatch" id="bgSepia" onclick="setBgColor('#F4ECD8',this)" style="background:#F4ECD8;" title="Sepia"></button>
+        <button class="bg-swatch" id="bgSky" onclick="setBgColor('#EFF6FF',this)" style="background:#EFF6FF;" title="Biru Langit"></button>
+        <button class="bg-swatch" id="bgRose" onclick="setBgColor('#FFF1F2',this)" style="background:#FFF1F2;" title="Mawar"></button>
+        <button class="bg-swatch" id="bgSlate" onclick="setBgColor('#1E293B',this)" style="background:#1E293B;" title="Gelap Slate"></button>
       </div>
     </div>
 
@@ -1070,6 +1168,43 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 </main>
 
+<!-- Update available toast -->
+<div id="updateToast" style="
+  display:none; position:fixed;
+  bottom:calc(var(--navbar-h) + var(--safe-bottom) + 16px);
+  right:16px; left:16px; z-index:400;
+  background:var(--g-700); color:#fff;
+  border-radius:14px; padding:14px 16px;
+  font-family:var(--ui-font); font-size:13px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.3);
+  direction:ltr; flex-direction:column; gap:10px;
+  animation: toastIn 0.35s cubic-bezier(.34,1.56,.64,1) both;
+  border: 1px solid rgba(201,168,76,0.3);
+">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:20px">🔄</span>
+    <div style="flex:1">
+      <div style="font-weight:700;font-size:13px;color:var(--gold-light);margin-bottom:2px">Pembaruan Tersedia</div>
+      <div style="font-size:11px;opacity:0.8;font-weight:500">Versi baru app sudah siap</div>
+    </div>
+    <button onclick="dismissUpdateToast()" style="color:rgba(255,255,255,0.45);font-size:18px;padding:2px 6px;line-height:1;">✕</button>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <button onclick="applyUpdate()" style="
+      flex:1; background:var(--gold); color:#1a1a1a;
+      border-radius:9px; padding:9px 16px;
+      font-size:12px; font-weight:700; font-family:var(--ui-font);
+      transition:opacity 0.2s;
+    ">⚡ Perbarui Sekarang</button>
+    <button onclick="dismissUpdateToast()" style="
+      flex:0 0 auto; background:rgba(255,255,255,0.1);
+      color:rgba(255,255,255,0.7);
+      border-radius:9px; padding:9px 14px;
+      font-size:12px; font-weight:600; font-family:var(--ui-font);
+    ">Nanti</button>
+  </div>
+</div>
+
 <!-- Offline ready toast -->
 <div id="offlineReady" style="
   display:none; position:fixed; bottom:calc(var(--navbar-h) + var(--safe-bottom) + 16px);
@@ -1158,6 +1293,32 @@ function setFont(font, btn) {
   localStorage.setItem('arabicFont', font);
 }
 
+// ===== FONT WEIGHT =====
+function setWeight(w, btn) {
+  document.documentElement.style.setProperty('--arabic-weight', w);
+  document.querySelectorAll('.weight-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  localStorage.setItem('arabicWeight', w);
+}
+
+// ===== BACKGROUND COLOR =====
+function setBgColor(val, btn) {
+  document.querySelectorAll('.bg-swatch').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (val === 'default') {
+    document.body.style.backgroundColor = '';
+    document.documentElement.style.removeProperty('--surface');
+    document.documentElement.style.removeProperty('--surface-alt');
+    localStorage.setItem('bgColor', 'default');
+  } else {
+    document.body.style.backgroundColor = val;
+    document.documentElement.style.setProperty('--surface', val);
+    // slightly tinted surface-alt
+    document.documentElement.style.setProperty('--surface-alt', val);
+    localStorage.setItem('bgColor', val);
+  }
+}
+
 // ===== RESTORE SETTINGS =====
 (function restore() {
   const theme = localStorage.getItem('theme') || 'light';
@@ -1167,6 +1328,22 @@ function setFont(font, btn) {
   const font = localStorage.getItem('arabicFont') || 'Scheherazade New';
   const fontBtn = document.querySelector('.font-opt[data-font="' + font + '"]');
   if (fontBtn) setFont(font, fontBtn);
+
+  // Restore font weight
+  const weight = parseInt(localStorage.getItem('arabicWeight') || '400');
+  const weightBtnMap = { 400: 'weightNormal', 500: 'weightMedium', 700: 'weightBold' };
+  const wBtn = document.getElementById(weightBtnMap[weight] || 'weightNormal');
+  if (wBtn) setWeight(weight, wBtn);
+
+  // Restore bg color
+  const bgColor = localStorage.getItem('bgColor') || 'default';
+  if (bgColor === 'default') {
+    const btn = document.getElementById('bgDefault');
+    if (btn) setBgColor('default', btn);
+  } else {
+    const btn = document.querySelector('.bg-swatch[onclick*="' + bgColor + '"]');
+    if (btn) setBgColor(bgColor, btn);
+  }
 })();
 
 // ===== OFFLINE =====
@@ -1177,32 +1354,71 @@ window.addEventListener('online', updateOnline);
 window.addEventListener('offline', updateOnline);
 updateOnline();
 
-// ===== PWA: SERVICE WORKER (Full Offline) =====
+// ===== PWA: SERVICE WORKER (Full Offline + Update Detection) =====
+let newWorker = null;
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js', { scope: './' })
     .then(reg => {
       console.log('[SW] Registered:', reg.scope);
-      // Notify user when new SW is waiting (app update available)
+
+      // Check for updates every 60s while page is open
+      setInterval(() => reg.update(), 60000);
+
       reg.addEventListener('updatefound', () => {
         const nw = reg.installing;
         nw.addEventListener('statechange', () => {
           if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-            console.log('[SW] Update ready');
+            // New version ready — show update toast
+            newWorker = nw;
+            showUpdateToast();
           }
         });
       });
     })
     .catch(err => console.warn('[SW] Registration failed:', err));
 
-  // Show "offline ready" notice once SW controls the page
+  // Reload page once new SW takes control
+  let refreshing = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    // First activation (offline ready notice)
     if (!sessionStorage.getItem('swReady')) {
       sessionStorage.setItem('swReady', '1');
       const toast = document.getElementById('offlineReady');
       toast.style.display = 'flex';
-      setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.5s'; setTimeout(() => toast.style.display = 'none', 500); }, 3500);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s';
+        setTimeout(() => toast.style.display = 'none', 500);
+      }, 3500);
+      return;
     }
+    // Subsequent: actual update reload
+    refreshing = true;
+    window.location.reload();
   });
+}
+
+function showUpdateToast() {
+  const t = document.getElementById('updateToast');
+  t.style.display = 'flex';
+}
+
+function dismissUpdateToast() {
+  const t = document.getElementById('updateToast');
+  t.style.opacity = '0';
+  t.style.transition = 'opacity 0.4s';
+  setTimeout(() => { t.style.display = 'none'; t.style.opacity = ''; t.style.transition = ''; }, 400);
+}
+
+function applyUpdate() {
+  dismissUpdateToast();
+  if (newWorker) {
+    newWorker.postMessage({ type: 'SKIP_WAITING' });
+  } else {
+    window.location.reload();
+  }
 }
 
 // ===== PWA: INSTALL PROMPT =====
