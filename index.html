@@ -1417,6 +1417,13 @@ if ('serviceWorker' in navigator) {
     refreshing = true;
     window.location.reload();
   });
+
+  // Dengar pesan SW_UPDATED (stale-while-revalidate detected new content)
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data && e.data.type === 'SW_UPDATED') {
+      showUpdateToast();
+    }
+  });
 }
 
 function showUpdateToast() {
@@ -1433,11 +1440,7 @@ function dismissUpdateToast() {
 
 function applyUpdate() {
   dismissUpdateToast();
-  if (newWorker) {
-    newWorker.postMessage({ type: 'SKIP_WAITING' });
-  } else {
-    window.location.reload();
-  }
+  window.location.reload();
 }
 
 // ===== PWA: INSTALL PROMPT =====
