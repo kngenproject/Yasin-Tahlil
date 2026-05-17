@@ -1311,7 +1311,7 @@ function setWeight(w, btn) {
 // ===== BACKGROUND COLOR =====
 // Setiap tema punya: bg (surface), card (surface-card), alt (surface-alt)
 const bgPalette = {
-  'default':  { surface: '#EAE6DC', card: '#F5F1E8', alt: '#DDD8CC' },
+  'default':  { surface: null, card: null, alt: null },
   '#FDF6E3':  { surface: '#FDF6E3', card: '#FFFDF5', alt: '#F5EDD4' },
   '#F0FBF3':  { surface: '#F0FBF3', card: '#FAFFFC', alt: '#E3F5E8' },
   '#F4ECD8':  { surface: '#F4ECD8', card: '#FDF8EE', alt: '#EBE0C8' },
@@ -1325,10 +1325,10 @@ function setBgColor(val, btn) {
   btn.classList.add('active');
   const p = bgPalette[val];
   if (!p || p.surface === null) {
-    document.body.style.backgroundColor = '#EAE6DC';
-    document.documentElement.style.setProperty('--surface', '#EAE6DC');
-    document.documentElement.style.setProperty('--surface-card', '#F5F1E8');
-    document.documentElement.style.setProperty('--surface-alt', '#DDD8CC');
+    document.body.style.backgroundColor = '';
+    document.documentElement.style.removeProperty('--surface');
+    document.documentElement.style.removeProperty('--surface-card');
+    document.documentElement.style.removeProperty('--surface-alt');
   } else {
     document.body.style.backgroundColor = p.surface;
     document.documentElement.style.setProperty('--surface', p.surface);
@@ -1358,13 +1358,7 @@ function setBgColor(val, btn) {
   const bgColor = localStorage.getItem('bgColor') || 'default';
   if (bgColor === 'default') {
     const btn = document.getElementById('bgDefault');
-    if (btn) {
-      setBgColor('default', btn);
-      // pastikan surface-card juga diterapkan
-      document.documentElement.style.setProperty('--surface', '#EAE6DC');
-      document.documentElement.style.setProperty('--surface-card', '#F5F1E8');
-      document.documentElement.style.setProperty('--surface-alt', '#DDD8CC');
-    }
+    if (btn) setBgColor('default', btn);
   } else {
     const btn = document.querySelector('.bg-swatch[onclick*="' + bgColor + '"]');
     if (btn) setBgColor(bgColor, btn);
