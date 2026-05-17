@@ -47,14 +47,14 @@
   --white:          #FFFFFF;
 
   /* Semantic */
-  --surface:        var(--cream);
-  --surface-card:   var(--white);
-  --surface-alt:    var(--paper);
-  --border:         rgba(0,0,0,0.07);
-  --border-mid:     rgba(0,0,0,0.12);
-  --shadow-sm:      0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md:      0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-  --shadow-lg:      0 12px 40px rgba(0,0,0,0.12);
+  --surface:        #EAE6DC;
+  --surface-card:   #F5F1E8;
+  --surface-alt:    #DDD8CC;
+  --border:         rgba(0,0,0,0.10);
+  --border-mid:     rgba(0,0,0,0.16);
+  --shadow-sm:      0 1px 4px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.08);
+  --shadow-lg:      0 12px 40px rgba(0,0,0,0.18);
 
   /* Radius */
   --r-sm:   8px;
@@ -371,7 +371,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 9px;
 }
 [data-theme="dark"] .s-head {
-  background: linear-gradient(90deg, var(--g-200) 0%, var(--g-100) 100%);
+  background: linear-gradient(90deg, #1B3A2D 0%, #224D3A 100%);
 }
 
 .s-head-icon {
@@ -387,7 +387,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-transform: uppercase;
   direction: ltr;
 }
-[data-theme="dark"] .s-head-title { color: var(--g-700); }
+[data-theme="dark"] .s-head-title { color: rgba(255,255,255,0.88); }
 
 /* Repeat badge on s-head */
 .s-head-badge {
@@ -966,7 +966,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     <div class="sheet-section">
       <div class="sheet-label">Warna Background</div>
       <div class="bg-color-row">
-        <button class="bg-swatch active" id="bgDefault" onclick="setBgColor('default',this)" style="background:var(--cream); border-color:var(--border-mid);" title="Default"></button>
+        <button class="bg-swatch active" id="bgDefault" onclick="setBgColor('default',this)" style="background:#EAE6DC; border-color:var(--border-mid);" title="Default"></button>
         <button class="bg-swatch" id="bgWarm" onclick="setBgColor('#FDF6E3',this)" style="background:#FDF6E3;" title="Krem Hangat"></button>
         <button class="bg-swatch" id="bgMint" onclick="setBgColor('#F0FBF3',this)" style="background:#F0FBF3;" title="Hijau Mint"></button>
         <button class="bg-swatch" id="bgSepia" onclick="setBgColor('#F4ECD8',this)" style="background:#F4ECD8;" title="Sepia"></button>
@@ -1311,7 +1311,7 @@ function setWeight(w, btn) {
 // ===== BACKGROUND COLOR =====
 // Setiap tema punya: bg (surface), card (surface-card), alt (surface-alt)
 const bgPalette = {
-  'default':  { surface: null,      card: null,      alt: null },
+  'default':  { surface: '#EAE6DC', card: '#F5F1E8', alt: '#DDD8CC' },
   '#FDF6E3':  { surface: '#FDF6E3', card: '#FFFDF5', alt: '#F5EDD4' },
   '#F0FBF3':  { surface: '#F0FBF3', card: '#FAFFFC', alt: '#E3F5E8' },
   '#F4ECD8':  { surface: '#F4ECD8', card: '#FDF8EE', alt: '#EBE0C8' },
@@ -1325,10 +1325,10 @@ function setBgColor(val, btn) {
   btn.classList.add('active');
   const p = bgPalette[val];
   if (!p || p.surface === null) {
-    document.body.style.backgroundColor = '';
-    document.documentElement.style.removeProperty('--surface');
-    document.documentElement.style.removeProperty('--surface-card');
-    document.documentElement.style.removeProperty('--surface-alt');
+    document.body.style.backgroundColor = '#EAE6DC';
+    document.documentElement.style.setProperty('--surface', '#EAE6DC');
+    document.documentElement.style.setProperty('--surface-card', '#F5F1E8');
+    document.documentElement.style.setProperty('--surface-alt', '#DDD8CC');
   } else {
     document.body.style.backgroundColor = p.surface;
     document.documentElement.style.setProperty('--surface', p.surface);
@@ -1358,7 +1358,13 @@ function setBgColor(val, btn) {
   const bgColor = localStorage.getItem('bgColor') || 'default';
   if (bgColor === 'default') {
     const btn = document.getElementById('bgDefault');
-    if (btn) setBgColor('default', btn);
+    if (btn) {
+      setBgColor('default', btn);
+      // pastikan surface-card juga diterapkan
+      document.documentElement.style.setProperty('--surface', '#EAE6DC');
+      document.documentElement.style.setProperty('--surface-card', '#F5F1E8');
+      document.documentElement.style.setProperty('--surface-alt', '#DDD8CC');
+    }
   } else {
     const btn = document.querySelector('.bg-swatch[onclick*="' + bgColor + '"]');
     if (btn) setBgColor(bgColor, btn);
