@@ -4,7 +4,7 @@
   "description": "Bacaan Hadhroh, Surah Yasin, Tahlil, dan Do'a — tersedia offline",
   "start_url": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#1B4332",
   "theme_color": "#1B4332",
   "icons": [

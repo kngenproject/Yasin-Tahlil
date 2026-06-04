@@ -889,6 +889,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .app-header { padding: 16px 24px 18px; }
   .app-body { padding: 20px 20px calc(var(--navbar-h) + var(--safe-bottom) + 20px); }
 }
+@media (min-width: 768px) and (orientation: landscape) {
+  .app-body {
+    max-width: 900px;
+    padding: 20px 32px calc(var(--navbar-h) + var(--safe-bottom) + 20px);
+  }
+  .s-body {
+    padding: 24px 28px;
+  }
+  .arabic {
+    --arabic-size: 28px; /* sedikit lebih besar di tablet landscape */
+  }
+}
 </style>
 </head>
 <body>
